@@ -1,10 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+
+
+<form action="#" th:action="@user/creat}" th:object="${userLK}" method="post">
+    <label for="firstname">FirstName</label>
+    <input type="text" th:field="*{firstName}" id="firstname" placeholder="FirstName">
+
+    <label for="lastname">LastName</label>
+    <input type="text" th:field="*{lastName}" id="lastname" placeholder="LastName">
+
+    <label for="email">Email</label>
+    <input type="email" th:field="*{email}" id="email" placeholder="Email">
+
+    <label for="phone">phone/label>
+    <input type="text" th:field="*{phone}" id="phone" placeholder="Phone">
+
+    <label for="birthday">Birthday</label>
+    <input type="text" th:field="*{birthday}" id="birthday" placeholder="Birthday">
+
+    <label for="login">Login</label>
+    <input type="text" th:field="*{login}" id="login" placeholder="Login">
+    <label for="login">Password</label>
+    <input type="text" th:field="*{password}" id="password" placeholder="Password">
+
+
+
+
+    <input type="submit" value="Add User">
+</form>
+
+
+<!--
+<form action="#" th:action="@{/user/create}" th:object="${user}" method="post">
+    <label for="name">Name</label>
+    <input type="text" th:field="*{firstName}" id="name" >
+    <label for="name">lastName</label>
+    <input type="text" th:field="*{lastName}" id="lastName">
+    <label for="name">email</label>
+    <input type="text" th:field="*{email}" id="email" >
+    <label for="name">Phone</label>
+    <input type="text" th:field="*{phone}" id="phone" >
+    <label for="name">birthday</label>
+    <input type="text" th:field="*{birthday}" id="birthday">
+    <label for="name">Login</label>
+    <input type="text" th:field="*{login}" id="login" >
+    <label for="name">Password</label>
+    <input type="text" th:field="*{password}" id="password">
+
+    <input type="submit" value="Add User">
+</form>
+-->
 </body>
-</html>
+</html
+>
