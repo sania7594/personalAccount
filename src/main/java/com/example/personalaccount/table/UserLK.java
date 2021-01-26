@@ -14,9 +14,12 @@ import java.util.Set;
 @Table(name="userlk")
 public class UserLK implements Serializable {
     private static final long serialVersionUID = -2343243243242432341L;
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long userId;
+    private Long userId;
 
     @OneToMany(mappedBy = "userLK",cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private Set<UserRoleDepartment> userRoleDepartments;
@@ -123,6 +126,12 @@ public class UserLK implements Serializable {
         this.password = password;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
 
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
 }

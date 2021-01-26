@@ -23,6 +23,10 @@ public class UserGroup {
         this.groupLK = groupLK;
     }
 
+    public UserGroup() {
+
+    }
+
     public UserLK getUserGroupLK() {
         return userGroupLK;
     }
