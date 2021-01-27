@@ -33,7 +33,6 @@ public class UserGroupController {
         this.groupRepository = groupRepository;
     }
 
-
     @GetMapping("findall")
     public List<UserGroup> findALL(){
         return userGroupsRepository.findAll();
@@ -44,30 +43,28 @@ public class UserGroupController {
 
     @PostMapping("/create/{userId}/{groupId}}")
     public UserGroup createUserGroups(@PathVariable Long userId, @PathVariable Long groupId){
-        UserGroup userGroup = null;
-        UserLK userLK=userRepository.findByUserId(userId);
-        GroupLK groupLK=groupRepository.findByGroupId(groupId);
-        userGroup.setUserGroupLK(userLK);
-        userGroup.setGroupLK(groupLK);
-        return (UserGroup) userGroupsRepository.save(userGroup);
-
+        UserGroup userGroup = vale(userId,groupId);
+        return userGroupsRepository.save(userGroup);
     }
-
     //@PutMapping("/update/{id}")
     //public UserGroup update(@PathVariable("id") UserGroup userGroupDB, @RequestBody UserGroup userGroup){
         //BeanUtils.copyProperties(userGroup,userGroupDB,"id");
 
         //return userGroupsRepository.save(userGroupDB);
     //}
-
     @DeleteMapping("/delete/{userId}/{groupId}}")
     public void delete(@PathVariable Long userId, @PathVariable Long groupId) {
-        UserGroup userGroup = null;
+        UserGroup userGroup = vale(userId,groupId);
+        userGroupsRepository.delete(userGroup);
+    }
+
+    private UserGroup vale(Long userId, Long groupId){
+        UserGroup userGroup = new UserGroup();
         UserLK userLK = userRepository.findByUserId(userId);
         GroupLK groupLK = groupRepository.findByGroupId(groupId);
         userGroup.setUserGroupLK(userLK);
         userGroup.setGroupLK(groupLK);
-        userGroupsRepository.delete(userGroup);
+        return userGroup;
     }
 
 }

@@ -43,33 +43,24 @@ public class UserRoleDepController {
 
     @PostMapping("/create/{userId}/{roleId}/{depId}")
     public UserRoleDepartment findEntity(@PathVariable Long userId, @PathVariable Long roleId, @PathVariable Long depId ){
-        UserRoleDepartment userRoleDepartment = null;
+        UserRoleDepartment userRoleDepartment=vale(userId,roleId,depId);
+        return userRolesDepartRepository.save(userRoleDepartment);
+    }
+
+    @DeleteMapping("/delete/{userId}/{roleId}/{depId}")
+    public void delete(@PathVariable Long userId, @PathVariable Long roleId, @PathVariable Long depId){
+        UserRoleDepartment userRoleDepartment = vale(userId,roleId,depId);
+        userRolesDepartRepository.delete(userRoleDepartment);
+    }
+
+    private UserRoleDepartment vale(Long userId, Long roleId, Long depId){
+        UserRoleDepartment userRoleDepartment = new UserRoleDepartment();
         UserLK userLK=userRepository.findByUserId(userId);
         Role role=roleRepository.findByUserIdR(roleId);
         Department department=departmentRepository.findByDepartmentId(depId);
         userRoleDepartment.setUserLK(userLK);
         userRoleDepartment.setRoleUser(role);
         userRoleDepartment.setDepartment(department);
-        return userRolesDepartRepository.save(userRoleDepartment);
-    }
-
-    //@DeleteMapping("/delete/{userId}/{roleId}/{depId}")
-    //public void delete(@PathVariable Long userId, @PathVariable Long roleId, @PathVariable Long depId){
-        //UserRoleDepartment userRoleDepartment = null;
-        //UserLK userLK=userRepository.findByUserId(userId);
-        //Role role=roleRepository.findByUserIdR(roleId);
-        //Department department=departmentRepository.findByDepartmentId(depId);
-        //assert userRoleDepartment != null;
-        //userRoleDepartment.setUserLK(userLK);
-        //userRoleDepartment.setRoleUser(role);
-        //userRoleDepartment.setDepartment(department);
-        //userRolesDepartRepository.delete(userRoleDepartment);
-    //}
-
-    @PutMapping("/update/{id}")
-    public UserRoleDepartment update(@PathVariable("id") UserRoleDepartment erdUpdateDB, @RequestBody UserRoleDepartment urd){
-        BeanUtils.copyProperties(urd,erdUpdateDB,"id");
-
-        return userRolesDepartRepository.save(erdUpdateDB);
+        return userRoleDepartment;
     }
 }

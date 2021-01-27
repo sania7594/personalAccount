@@ -7,7 +7,7 @@
 <body>
 
 
-<form action="#" th:action="@user/creat}" th:object="${userLK}" method="post">
+<form action="#" th:action="@{user/create}" th:object="${userLK}" method="post">
     <label for="firstname">FirstName</label>
     <input type="text" th:field="*{firstName}" id="firstname" placeholder="FirstName">
 
@@ -17,7 +17,7 @@
     <label for="email">Email</label>
     <input type="email" th:field="*{email}" id="email" placeholder="Email">
 
-    <label for="phone">phone/label>
+    <label for="phone">phone</label>
     <input type="text" th:field="*{phone}" id="phone" placeholder="Phone">
 
     <label for="birthday">Birthday</label>

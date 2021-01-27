@@ -5,6 +5,7 @@ import com.example.personalaccount.repository.DepartmentRepository;
 import com.example.personalaccount.repository.UserCoursesDepartRepository;
 import com.example.personalaccount.repository.UserRepository;
 import com.example.personalaccount.table.*;
+import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,15 +43,15 @@ public class UserCourceDepartController {
     @GetMapping("/findone/{id}")
     public UserCoursersDepartment getOne(@PathVariable("id") UserCoursersDepartment userCoursersDepartment){return userCoursersDepartment;}
 
+    //контроллер поиска по имени
+    //сложный поиск
+    //самбим выбирается контроллер
+    //экшен названия по полю
+
     @PostMapping("/create/{userId}/{courseId}/{depId}")
     public UserCoursersDepartment create(@PathVariable Long userId, @PathVariable Long courseId, @PathVariable Long depId){
-        UserCoursersDepartment userCoursersDepartment = null;
-        UserLK userLK=userRepository.findByUserId(userId);
-        CourcesLK courcesLK=coursesRepository.findByCourcesId(courseId);
-        Department departmentLK=departmentRepository.findByDepartmentId(depId);
-        userCoursersDepartment.setUserL(userLK);
-        userCoursersDepartment.setCourcesLK(courcesLK);
-        userCoursersDepartment.setDepartmentL(departmentLK);
+        UserCoursersDepartment userCoursersDepartment = vale(userId, courseId, depId);
+
 
         return userCoursesDepartRepository.save(userCoursersDepartment);
 
@@ -58,15 +59,19 @@ public class UserCourceDepartController {
 
     @DeleteMapping("/delete/{userId}/{courseId}/{depId}")
     public void delete(@PathVariable Long userId, @PathVariable Long courseId, @PathVariable Long depId){
-        UserCoursersDepartment userCoursersDepartment = null;
+        UserCoursersDepartment userCoursersDepartment=vale(userId,courseId,depId);
+        userCoursesDepartRepository.delete(userCoursersDepartment);
+    }
+
+    private UserCoursersDepartment vale(Long userId, Long courseId, Long depId){
+        UserCoursersDepartment userCoursersDepartment = new UserCoursersDepartment();
         UserLK userLK=userRepository.findByUserId(userId);
         CourcesLK courcesLK=coursesRepository.findByCourcesId(courseId);
         Department departmentLK=departmentRepository.findByDepartmentId(depId);
         userCoursersDepartment.setUserL(userLK);
         userCoursersDepartment.setCourcesLK(courcesLK);
         userCoursersDepartment.setDepartmentL(departmentLK);
-
-        userCoursesDepartRepository.delete(userCoursersDepartment);
+        return userCoursersDepartment;
     }
 
     @PutMapping("/update/{id}")

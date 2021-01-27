@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SpecialityRepository extends JpaRepository<SpecialityLK, Long> {
+    SpecialityLK findBySpecialityId(Long id);
 
 }

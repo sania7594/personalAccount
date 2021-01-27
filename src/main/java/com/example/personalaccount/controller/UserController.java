@@ -33,15 +33,15 @@ public class UserController {
     @GetMapping("/findone/{id}")
     public UserLK getOne(@PathVariable("id") UserLK userLK){return userLK;}
     
-    //@PostMapping("/create")
-    //public UserLK create(@RequestBody UserLK userLK){
-        //return repository.save(userLK);
-    //}
-
     @PostMapping("/create")
-    public UserLK create(@ModelAttribute("userLK") UserLK userLK){
+    public UserLK create(@RequestBody UserLK userLK){
         return repository.save(userLK);
     }
+
+    //@PostMapping("/create")
+    //public UserLK create(@ModelAttribute("userLK") UserLK userLK){
+        //return repository.save(userLK);
+    //}
 
     //@PostMapping("/create")
     //public UserLK create(@RequestBody UserLK userLK, Model model){
