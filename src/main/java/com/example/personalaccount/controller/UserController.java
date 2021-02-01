@@ -53,11 +53,11 @@ public class UserController {
     public UserLK addUser(Model model, @ModelAttribute("userLK") UserLK userLK){
         return repository.save(userLK);
     }
-
+   ///
     //@PostMapping("/create")
     //public UserLK create(@RequestBody UserLK userLK){
         //return repository.save(userLK);
-    //}
+    //}////
 
     //@RequestMapping(value="/user", method = RequestMethod.GET)
     //public String init(@ModelAttribute("userLK") ModelMap userLK){
