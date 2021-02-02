@@ -10,13 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-@Controller
+@RestController
 //@RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -27,66 +28,25 @@ public class UserController {
     }
 
 
-    @GetMapping("/findall")
-    public List<UserLK> findALL(){
-        return repository.findAll();
-    }
-
-    @GetMapping("/findone/{id}")
-    public UserLK getOne(@PathVariable("id") UserLK userLK){return userLK;}
-
-
-    @GetMapping(value={"/user/create"})
-    public String init(@ModelAttribute("model") ModelMap model) {
-        model.addAttribute("repository", repository);
+    @GetMapping("/add")
+    public String formGet() {
         return "index";
     }
 
-    public String showAddUser(Model model){
-        UserLK userLK=new UserLK();
-        model.addAttribute("create",true);
-        model.addAttribute("userLK",userLK);
-
-        return "user-edit";
+    @PostMapping("/add")
+    public String formPost(UserLK userLK, Model model) {
+        model.addAttribute("userLK", userLK);
+        repository.save(userLK);
+        return "index";
     }
 
-    @PostMapping(value={"/add"})
-    public UserLK addUser(Model model, @ModelAttribute("userLK") UserLK userLK){
-        return repository.save(userLK);
-    }
-
-    //@RequestMapping(value="add", method=RequestMethod.GET)
-    //public String addUser(@ModelAttribute("userLK") UserLK userLK){
-        //repository.save(userLK);
-        //return "oK";
-    //}
-   ///
-    //@PostMapping("/create")
-    //public UserLK create(@RequestBody UserLK userLK){
-        //return repository.save(userLK);
-    //}////
-
-    //@RequestMapping(value="/user", method = RequestMethod.GET)
-    //public String init(@ModelAttribute("userLK") ModelMap userLK){
-        //userLK.addAttribute("users",repository);
-       // return "OK";
-    //}
-
-    @RequestMapping(value="/add", method = RequestMethod.POST)
-    public UserLK addUser(@ModelAttribute("userLK") UserLK userLK){
-        return repository.save(userLK);
+    @GetMapping("/users")
+    public String formUsers(@ModelAttribute("model") ModelMap model){
+        model.addAttribute("repository",repository);
+        repository.findAll();
+        return "result";
     }
 
 
-    @PutMapping("/update/{id}")
-    public UserLK update(@PathVariable("id") UserLK userUpdateDB, @RequestBody UserLK userLK){
-        BeanUtils.copyProperties(userLK,userUpdateDB,"id");
 
-        return repository.save(userUpdateDB);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable("id") UserLK userLK){
-        repository.delete(userLK);
-    }
 }
