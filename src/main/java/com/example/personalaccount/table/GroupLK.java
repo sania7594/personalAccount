@@ -2,6 +2,7 @@ package com.example.personalaccount.table;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Entity
@@ -15,6 +16,7 @@ public class GroupLK {
     private Set<UserGroup> userGroups;
 
     @Column
+    @NotEmpty(message = "Please your group name")
     private String groupName;
 
     public GroupLK(String groupName) {

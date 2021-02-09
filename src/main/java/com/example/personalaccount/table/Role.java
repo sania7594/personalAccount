@@ -1,6 +1,7 @@
 package com.example.personalaccount.table;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ public class Role {
     private Set<UserRoleDepartment> role;
 
     @Column
+    @NotEmpty(message = "Please your first name")
     private String roleName;
 
     public Role(String roleName) {

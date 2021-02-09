@@ -1,6 +1,7 @@
 package com.example.personalaccount.table;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Entity
@@ -12,6 +13,7 @@ public class CourcesLK {
     private Long courcesId;
 
     @Column
+    @NotEmpty(message = "Please your cources name")
     private String courcesName;
 
     @OneToMany(mappedBy = "courcesLK",cascade = {CascadeType.PERSIST, CascadeType.MERGE})

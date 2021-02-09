@@ -20,29 +20,32 @@
         .datatable tr {border:1px solid #888}
         .datatable tr.odd {background-color:#eee}
         .datatable td {padding:2px;border:1px solid #888}
-        #content { padding: 5px; margin: 5px; text-align: center}
+        #content { padding 5px; margin: 5px; text-align: center}
 
         fieldset { width: 300px; padding: 5px; margin-bottom: 0px; }
         legend { font-weight: bold; }
     </style>
+
 <body>
+<div id="header">
+    <H2>
+        FreeMarker Spring MVC Hello World
+    </H2>
+</div>
 
-<table class="datatable">
-<tr>
-    <th>FirstName</th>  <th>LastName</th>
-    <th>Email</th>  <th>Phone</th>
-    <th>Birthday</th>  <th>Login</th>
-    <th>Password</th>
-</tr>
-<#list model["repository"] as userLK>
-    <tr>
-        <td>${userLK.firstName}</td> <td>${userLK.lastName}</td>
-        <td>${userLK.email}</td> <td>${userLK.phone}</td>
-        <td>${userLK.birthday}</td> <td>${userLK.login}</td>
-        <td>${userLK.password}</td>
-    </tr>
-</#list>
-</table>
+<div id="content">
 
+    <fieldset>
+        <legend>Add speciality</legend>
+        <form name="speciality" action="addspeciality" method="post">
+            SpecialityName: <input type="text" name="specialityName" /> <br/>
+            <input type="submit" value="Save" />
+        </form>
+    </fieldset>
+
+    <br/>
+
+
+</div>
 </body>
-
+</html>

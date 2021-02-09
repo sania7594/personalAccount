@@ -6,17 +6,23 @@ package com.example.personalaccount.table;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name="userlk")
-public class UserLK implements Serializable {
-    private static final long serialVersionUID = -2343243243242432341L;
+//public class UserLK implements Serializable {
+  public class UserLK{
+    //private static final long serialVersionUID = -2343243243242432341L;
 
-
-
+    //DTO
+    //@Data
+    //моя пометка по логину можно искать
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
@@ -34,25 +40,37 @@ public class UserLK implements Serializable {
     private Set<UserSpecialCourse> userSpecialCourses;
 
     @Column
+    @NotEmpty(message = "Please your first name")
     private String firstName;
 
+
     @Column
+    @NotEmpty(message = "Please your last name")
     private String lastName;
 
+    @Email
     @Column
+    @NotBlank(message="{register.email.invalid}")
+    @Size(min=6, max=80)
     private String email;
 
-    @Column
+
+    @Column(unique = true)
+    @NotBlank(message="{register.phone.invalid}")
+    @Size(min=6, max=12)
     private String phone;
 
     @Column
+    @NotEmpty(message = "Please your birthday")
     private String birthday;
 
     @Column
+    @NotEmpty(message = "Please your login")
     private String login;
 
 
     @Column
+    @NotEmpty(message = "Please your password")
     private String password;
 
 

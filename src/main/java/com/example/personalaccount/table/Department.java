@@ -2,6 +2,7 @@ package com.example.personalaccount.table;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ public class Department {
     private Set<UserRoleDepartment> userRoleDepartments;
 
     @Column()
+    @NotEmpty(message = "Please your department name")
     private String departmentName;
 
     //parent
@@ -35,7 +37,6 @@ public class Department {
     public Department(String departmentName) {
         this.departmentName = departmentName;
     }
-
     public Department() {
 
     }
