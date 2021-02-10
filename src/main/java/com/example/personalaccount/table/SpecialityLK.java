@@ -2,6 +2,7 @@ package com.example.personalaccount.table;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Entity
@@ -20,14 +21,39 @@ public class SpecialityLK {
     private Set<UserSpecialCourse> userSpecialCourses;
 
     @Column
-    private String departmentName;
+    @NotEmpty(message = "Please your speciality name")
+    private String specialityName;
 
-    public SpecialityLK(Department departmentS, String departmentName) {
+    public SpecialityLK(Department departmentS, String specialityName) {
         this.departmentS = departmentS;
-        this.departmentName = departmentName;
+        this.specialityName = specialityName;
     }
 
     public SpecialityLK() {
 
+    }
+
+    public Department getDepartmentS() {
+        return departmentS;
+    }
+
+    public void setDepartmentS(Department departmentS) {
+        this.departmentS = departmentS;
+    }
+
+    public Set<UserSpecialCourse> getUserSpecialCourses() {
+        return userSpecialCourses;
+    }
+
+    public void setUserSpecialCourses(Set<UserSpecialCourse> userSpecialCourses) {
+        this.userSpecialCourses = userSpecialCourses;
+    }
+
+    public String getSpecialityName() {
+        return specialityName;
+    }
+
+    public void setSpecialityName(String specialityName) {
+        this.specialityName = specialityName;
     }
 }
